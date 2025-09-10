@@ -1,0 +1,14 @@
+function DEPLOY_SCRIPT(SRC) {
+  const SCRIPT = document.createElement('script');
+  SCRIPT.src = SRC;
+  document.body.appendChild(SCRIPT);
+}
+function DEPLOY_CSS(URL) {
+  const CSS = document.createElement('link');
+  CSS.rel = 'stylesheet';
+  CSS.href = URL;
+  document.head.appendChild(CSS);
+}
+
+DEPLOY_SCRIPT('./components/navbar/navbar.js');
+DEPLOY_CSS('./components/navbar/navbar.css');
