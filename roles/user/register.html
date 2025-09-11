@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRO</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="sources.css">
+</head>
+<body>
+    <div id="REGISTER_CONTAINER">
+        <form id="REGISTER_FORM">
+            <img src="../../assets/logo_blue.png" alt="logo">
+            <h2>REGISTRO</h2>
+            <input type="text" id="username" placeholder="Usuario" required>
+            <input type="text" id="area" placeholder="Area" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+            <a href="./login.html">Iniciar Sesion</a>
+        </form>
+    </div>
+<script>
+const WEBHOOK_URL = "http://localhost:5678/webhook-test/register";
+
+document.getElementById("REGISTER_FORM").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const username = document.getElementById("username").value;
+  const area = document.getElementById("area").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const rol = "user";
+
+  const res = await fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, area, email, password, rol })
+
+  });
+
+  const data = await res.json();
+  alert(data.message);
+});
+</script>
+</body>
+</html>
