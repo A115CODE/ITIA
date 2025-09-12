@@ -21,10 +21,10 @@ BTNS_LIST.classList.add('sidebar-menu');
 BTNS_LIST.id = 'sidebarMenu';
 NAVBAR.appendChild(BTNS_LIST);
 
-function DEPLOY_BTN(btn, img) {
+function DEPLOY_BTN(btn, btn_id, img) {
   const TITLE = document.createElement('li');
-
   TITLE.textContent = btn;
+  TITLE.id = btn_id;
   BTNS_LIST.appendChild(TITLE);
 
   const ICON = document.createElement('img');
@@ -32,13 +32,13 @@ function DEPLOY_BTN(btn, img) {
   TITLE.appendChild(ICON);
 }
 
-DEPLOY_BTN('Dashboard', '../../assets/dashboard.svg');
-DEPLOY_BTN('Tickets', '../../assets/tickets.svg');
-DEPLOY_BTN('Agentes', '../../assets/agentes.svg');
-DEPLOY_BTN('Equipos', '../../assets/equipos.svg');
-DEPLOY_BTN('Reportes', '../../assets/reportes.svg');
-DEPLOY_BTN('Configuraciones', '../../assets/config.svg');
-DEPLOY_BTN('Base Del Conocimiento', '../../assets/database.svg');
+DEPLOY_BTN('Dashboard', 'DASHBOARD', '../../assets/dashboard.svg');
+DEPLOY_BTN('Tickets', 'TICKETS', '../../assets/tickets.svg');
+DEPLOY_BTN('Agentes', 'AGENTES', '../../assets/agentes.svg');
+DEPLOY_BTN('Equipos', 'EQUIPOS', '../../assets/equipos.svg');
+DEPLOY_BTN('Reportes', 'REPORTES', '../../assets/reportes.svg');
+DEPLOY_BTN('Configuraciones', 'CONFIGURACIONES', '../../assets/config.svg');
+DEPLOY_BTN('Base Del Conocimiento', 'BASE_DEL_CONOCIMIENTO','../../assets/database.svg');
 
 const sidebarHeader = document.getElementById('sidebarHeader');
 const sidebarMenu = document.getElementById('sidebarMenu');
