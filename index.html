@@ -158,5 +158,66 @@
       </div>
     </div>
     <script src="sidebar.js"></script>
+    <div class="tickets-container">
+      <div class="tickets-header">
+        <h2>Últimos Tickets</h2>
+        <button class="add-ticket-btn">+ Nuevo Ticket</button>
+      </div>
+      <table class="tickets-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Asunto</th>
+            <th>Cliente</th>
+            <th>Agente</th>
+            <th>Prioridad</th>
+            <th>Estado</th>
+            <th>Última Actualización</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+    <script>
+      async function cargarTickets() {
+        try {
+          // Llamada a tu webhook de n8n
+          const res = await fetch("http://localhost:5678/webhook/tickets");
+          const tickets = await res.json();
+    
+          const tbody = document.querySelector(".tickets-table tbody");
+          tbody.innerHTML = "";
+    
+          tickets.forEach(ticket => {
+            const tr = document.createElement("tr");
+    
+            tr.innerHTML = `
+              <td>#${ticket.id}</td>
+              <td>${ticket.titulo}</td>
+              <td>${ticket.cliente || "—"}</td>
+              <td>${ticket.agente || "Sin asignar"}</td>
+              <td class="priority-${ticket.prioridad}">
+                ${ticket.prioridad.charAt(0).toUpperCase() + ticket.prioridad.slice(1)}
+              </td>
+              <td>
+                <span class="status-badge status-${ticket.estado}">
+                  ${ticket.estado.charAt(0).toUpperCase() + ticket.estado.slice(1)}
+                </span>
+              </td>
+              <td>${new Date(ticket.fecha_actualizacion).toLocaleString()}</td>
+            `;
+    
+            tbody.appendChild(tr);
+          });
+        } catch (error) {
+          console.error("Error cargando tickets:", error);
+        }
+      }
+    
+      // Ejecutar al cargar la página
+      cargarTickets();
+    </script>
+    
   </body>
 </html>
