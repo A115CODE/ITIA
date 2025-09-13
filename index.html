@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Dashboard de Tickets - Estilo Zendesk</title>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header" id="sidebarHeader">
+        <img id="LOGO" src="./assets/logo_white.png" alt="" />
+      </div>
+      <ul class="sidebar-menu" id="sidebarMenu">
+        <li class="active">
+          <img src="./assets/dashboard.svg" alt="" /> Dashboard
+        </li>
+        <li><img src="./assets/tickets.svg" alt="" /> Tickets</li>
+        <li><img src="./assets/agentes.svg" alt="" /> Agentes</li>
+        <li>
+          <img
+            src="./assets/usuarios.svg
+          "
+            alt=""
+          />
+          Usuarios
+        </li>
+        <li><img src="./assets/equipos.svg" alt="" /> Equipos</li>
+        <li><img src="./assets/reportes.svg" alt="" /> Reportes</li>
+        <li><img src="./assets/config.svg" alt="" /> Configuración</li>
+        <li>
+          <img src="./assets/database.svg" alt="" /> Base Del Conocimiento
+        </li>
+<a href="./roles/technical/dashboard.html">Tickets</a>
+<a href="./roles/user/login.html">Chat</a>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="header">
+        <h2>Dashboard</h2>
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar tickets..." />
+          <button>🔍</button>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-container">
+        <div class="stat-card open">
+          <div class="icon">
+            <img src="./assets/tikets_abiertos.svg" alt="" />
+          </div>
+          <div class="info">
+            <h3>24</h3>
+            <p>Tickets Abiertos</p>
+          </div>
+        </div>
+        <div class="stat-card pending">
+          <div class="icon">
+            <img src="./assets/tikets_pendientes.svg" alt="" />
+          </div>
+          <div class="info">
+            <h3>18</h3>
+            <p>Tickets Pendientes</p>
+          </div>
+        </div>
+        <div class="stat-card closed">
+          <div class="icon">
+            <img src="./assets/tikets_cerrados.svg" alt="" />
+          </div>
+          <div class="info">
+            <h3>156</h3>
+            <p>Tickets Cerrados</p>
+          </div>
+        </div>
+        <div class="stat-card all">
+          <div class="icon"><img src="./assets/tikets_total.svg" alt="" /></div>
+          <div class="info">
+            <h3>198</h3>
+            <p>Total de Tickets</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tickets Table -->
+      <div class="tickets-container">
+        <div class="tickets-header">
+          <h2>Últimos Tickets</h2>
+          <button class="add-ticket-btn">+ Nuevo Ticket</button>
+        </div>
+        <table class="tickets-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Asunto</th>
+              <th>Cliente</th>
+              <th>Agente</th>
+              <th>Prioridad</th>
+              <th>Estado</th>
+              <th>Última Actualización</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#1089</td>
+              <td>Problema con la facturación</td>
+              <td>Carlos Martínez</td>
+              <td>Ana López</td>
+              <td class="priority-high">Alta</td>
+              <td><span class="status-badge status-open">Abierto</span></td>
+              <td>hace 2 horas</td>
+            </tr>
+            <tr>
+              <td>#1088</td>
+              <td>Error en la plataforma móvil</td>
+              <td>María González</td>
+              <td>Pedro Sánchez</td>
+              <td class="priority-medium">Media</td>
+              <td>
+                <span class="status-badge status-pending">Pendiente</span>
+              </td>
+              <td>hace 4 horas</td>
+            </tr>
+            <tr>
+              <td>#1087</td>
+              <td>Solicitud de nueva funcionalidad</td>
+              <td>Juan Pérez</td>
+              <td>Sin asignar</td>
+              <td class="priority-low">Baja</td>
+              <td><span class="status-badge status-open">Abierto</span></td>
+              <td>hace 1 día</td>
+            </tr>
+            <tr>
+              <td>#1086</td>
+              <td>Problema de acceso</td>
+              <td>Laura Ramírez</td>
+              <td>Ana López</td>
+              <td class="priority-high">Alta</td>
+              <td>
+                <span class="status-badge status-pending">Pendiente</span>
+              </td>
+              <td>hace 1 día</td>
+            </tr>
+            <tr>
+              <td>#1085</td>
+              <td>Consulta sobre precios</td>
+              <td>Roberto Díaz</td>
+              <td>Pedro Sánchez</td>
+              <td class="priority-medium">Media</td>
+              <td><span class="status-badge status-closed">Cerrado</span></td>
+              <td>hace 2 días</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="sidebar.js"></script>
+  </body>
+</html>
