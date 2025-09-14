@@ -1,0 +1,175 @@
+:root {
+  --primary-color: #00457d;
+  --secondary-color: #0078d7;
+  --success-color: #4caf50;
+  --warning-color: #ffc107;
+  --danger-color: #f44336;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --sidebar-width: 15%;
+  --shadow-elements: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* Tickets Table */
+
+#TICKETS_CONTAINER {
+    margin-left: var(--sidebar-width);
+}
+
+.tickets-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.tickets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tickets-header h2 {
+  color: var(--dark-color);
+  font-size: 1.3rem;
+}
+
+.add-ticket-btn {
+  padding: 8px 16px;
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.tickets-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tickets-table th,
+.tickets-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.tickets-table th {
+  background-color: #f8f9fa;
+  color: var(--dark-color);
+  font-weight: 600;
+}
+
+.tickets-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-open {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var(--danger-color);
+}
+
+.status-pending {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #e0a800;
+}
+
+.status-closed {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--success-color);
+}
+
+.priority-high {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.priority-medium {
+  color: var(--warning-color);
+  font-weight: 600;
+}
+
+.priority-low {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive sidebar*/
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .sidebar-menu {
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .sidebar-menu.expanded {
+    max-height: 500px;
+  }
+
+  .sidebar-header::after {
+    content: '▼';
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-header.expanded::after {
+    content: '▶';
+  }
+}
+
+/* Responsive main y header*/
+@media (max-width: 768px) {
+  .main-content {
+    width: 100%;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+  .user-profile {
+    display: none;
+  }
+}
