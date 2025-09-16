@@ -40,7 +40,7 @@ DEPLOY_TH("DESCRIPCION");
 DEPLOY_TH("ESTADO");
 DEPLOY_TH("PRIORIDAD");
 DEPLOY_TH("USUARIO");
-DEPLOY_TH("FECHA aCTUALIZACION")
+DEPLOY_TH("FECHA aCTUALIZACION");
 DEPLOY_TH("ACCIONES");
 
 const TICKETS_TABLE_TBODY = document.createElement("tbody");
@@ -118,7 +118,8 @@ async function cargarTickets() {
       const accionesMenu = tr.querySelector(".acciones-menu");
       accionesBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        accionesMenu.style.display = accionesMenu.style.display === "block" ? "none" : "block";
+        accionesMenu.style.display =
+          accionesMenu.style.display === "block" ? "none" : "block";
       });
 
       // Cerrar el menú si se hace clic fuera
@@ -131,7 +132,47 @@ async function cargarTickets() {
         alert(`Ticket #${ticket.id_ticket} asignado a ti.`);
         accionesMenu.style.display = "none";
         // Aquí puedes agregar la lógica para asignar el ticket
+        // Función que maneja la asignación del ticket
+        async function asignarTicket() {
+          // 1. Obtener el JWT del sessionStorage
+          const token = sessionStorage.getItem("jwt"); // Asegúrate que la clave sea correcta
+          if (!token) {
+            alert("No hay token de autenticación. Por favor, inicia sesión.");
+            return;
+          }
+          try {
+            // 2. Enviar petición POST al webhook
+            const res = await fetch(
+              "http://localhost:5678/webhook/asignar/ticket",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token }),
+              }
+            );
+            // 3. Manejar respuesta
+            if (res.ok) {
+              alert("¡Ticket asignado correctamente!");
+              // Puedes actualizar la UI aquí, por ejemplo:
+              cargarTickets()
+              // location.reload();  // si quieres recargar
+              // o actualizar un elemento del DOM
+            } else {
+              alert("Error al asignar el ticket. Intenta nuevamente.");
+            }
+          } catch (error) {
+            console.error("Error en la petición:", error);
+            alert("Hubo un problema de conexión.");
+          }
+        }
+        // Asignar evento al botón
+        document
+          .querySelector(".asignar-btn")
+          .addEventListener("click", asignarTicket);
       });
+
 
       tr.querySelector(".enviar-btn").addEventListener("click", () => {
         alert(`Enviar ticket #${ticket.id_ticket} a otro equipo.`);
