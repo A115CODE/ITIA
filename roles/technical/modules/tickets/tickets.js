@@ -47,10 +47,32 @@ const TICKETS_TABLE_TBODY = document.createElement("tbody");
 TICKETS_TABLE_TBODY.id = "TICKETS_TABLE_TBODY";
 TICKETS_TABLE.appendChild(TICKETS_TABLE_TBODY);
 
-// Función para cargar tickets desde el webhook de n8n
+// Recuperar JWT del sessionStorage
+function obtenerToken() {
+  const jwtData = sessionStorage.getItem("jwtData");
+  if (!jwtData) return null;
+  try {
+    const { token, expiraEn } = JSON.parse(jwtData);
+    if (Date.now() > expiraEn) {
+      sessionStorage.removeItem("jwtData");
+      return null;
+    }
+    return token;
+  } catch {
+    return null;
+  }
+}
 
+// cargar los tikes
 async function cargarTickets() {
   try {
+    // mandamos token pendejo
+    const token = obtenerToken();
+    if (!token) {
+      alert("Sesión expirada o no iniciada. Por favor, inicie sesión.");
+      window.location.href = "../login_tikets.html";
+      return;
+    }
     // Llama al webhook de n8n
     const res = await fetch("http://localhost:5678/webhook/tickets", {
       method: "POST",
