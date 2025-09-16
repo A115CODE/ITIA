@@ -67,6 +67,8 @@ console.log("Token obtenido:", obtenerToken());
 // cargar los tikes
 async function cargarTickets() {
   try {
+
+    console.log("Token dentro de enviar:", obtenerToken());
     // mandamos token pendejo
     const token = obtenerToken();
     if (!token) {
@@ -78,6 +80,7 @@ async function cargarTickets() {
     const res = await fetch("http://localhost:5678/webhook/tickets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token }),
     });
     const tickets = await res.json();
 
