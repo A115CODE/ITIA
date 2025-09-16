@@ -40,7 +40,6 @@ DEPLOY_TH("DESCRIPCION");
 DEPLOY_TH("ESTADO");
 DEPLOY_TH("PRIORIDAD");
 DEPLOY_TH("USUARIO");
-DEPLOY_TH("AGENTE");
 DEPLOY_TH("FECHA aCTUALIZACION")
 DEPLOY_TH("ACCIONES");
 
@@ -102,7 +101,6 @@ async function cargarTickets() {
             ${ticket.prioridad}
           </td>
           <td>${ticket.nombre_usuario}</td>
-          <td>${ticket.nombre_agente || "-"}</td>
           <td>${new Date(ticket.fecha_actualizacion).toLocaleString()}</td>
           <td>
             <div class="acciones-dropdown">
