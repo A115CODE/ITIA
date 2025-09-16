@@ -41,7 +41,8 @@ DEPLOY_TH("ESTADO");
 DEPLOY_TH("PRIORIDAD");
 DEPLOY_TH("USUARIO");
 DEPLOY_TH("AGENTE");
-DEPLOY_TH("FECHA aCTUALIZACION");
+DEPLOY_TH("FECHA aCTUALIZACION")
+DEPLOY_TH("ACCIONES");
 
 const TICKETS_TABLE_TBODY = document.createElement("tbody");
 TICKETS_TABLE_TBODY.id = "TICKETS_TABLE_TBODY";
@@ -101,9 +102,44 @@ async function cargarTickets() {
             ${ticket.prioridad}
           </td>
           <td>${ticket.nombre_usuario}</td>
-
+          <td>${ticket.nombre_agente || "-"}</td>
           <td>${new Date(ticket.fecha_actualizacion).toLocaleString()}</td>
+          <td>
+            <div class="acciones-dropdown">
+              <button class="acciones-btn">Acciones</button>
+              <div class="acciones-menu" style="display:none;position:absolute;z-index:10;background:#fff;border:1px solid #ccc;">
+                <button class="asignar-btn">Asignármelo</button>
+                <button class="enviar-btn">Enviar a otro equipo</button>
+              </div>
+            </div>
+          </td>
         `;
+
+      // Lógica para mostrar/ocultar el menú
+      const accionesBtn = tr.querySelector(".acciones-btn");
+      const accionesMenu = tr.querySelector(".acciones-menu");
+      accionesBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        accionesMenu.style.display = accionesMenu.style.display === "block" ? "none" : "block";
+      });
+
+      // Cerrar el menú si se hace clic fuera
+      document.addEventListener("click", () => {
+        accionesMenu.style.display = "none";
+      });
+
+      // Eventos para los botones del menú
+      tr.querySelector(".asignar-btn").addEventListener("click", () => {
+        alert(`Ticket #${ticket.id_ticket} asignado a ti.`);
+        accionesMenu.style.display = "none";
+        // Aquí puedes agregar la lógica para asignar el ticket
+      });
+
+      tr.querySelector(".enviar-btn").addEventListener("click", () => {
+        alert(`Enviar ticket #${ticket.id_ticket} a otro equipo.`);
+        accionesMenu.style.display = "none";
+        // Aquí puedes agregar la lógica para enviar el ticket
+      });
 
       tbody.appendChild(tr);
     });
