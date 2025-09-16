@@ -1,0 +1,11 @@
+:root {
+  --primary-color: #00457d;
+  --secondary-color: #0078d7;
+  --success-color: #4caf50;
+  --warning-color: #ffc107;
+  --danger-color: #f44336;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --sidebar-width: 25%;
+  --shadow-elements: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
