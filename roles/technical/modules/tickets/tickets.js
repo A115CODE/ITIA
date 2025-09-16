@@ -63,6 +63,7 @@ function obtenerToken() {
   }
 }
 
+console.log("Token obtenido:", obtenerToken());
 // cargar los tikes
 async function cargarTickets() {
   try {
