@@ -71,7 +71,7 @@ async function cargarTickets() {
     const token = obtenerToken();
     if (!token) {
       alert("Sesión expirada o no iniciada. Por favor, inicie sesión.");
-      window.location.href = "../login_tikets.html";
+      window.location.href = "./login_tikets.html";
       return;
     }
     // Llama al webhook de n8n
