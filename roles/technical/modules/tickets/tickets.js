@@ -101,7 +101,7 @@ async function cargarTickets() {
             ${ticket.prioridad}
           </td>
           <td>${ticket.nombre_usuario}</td>
-          <td>${ticket.id_asignado || "Sin asignar"}</td>
+
           <td>${new Date(ticket.fecha_actualizacion).toLocaleString()}</td>
         `;
 
