@@ -40,8 +40,9 @@ DEPLOY_TH("DESCRIPCION");
 DEPLOY_TH("ESTADO");
 DEPLOY_TH("PRIORIDAD");
 DEPLOY_TH("USUARIO");
-DEPLOY_TH("FECHA aCTUALIZACION");
+DEPLOY_TH("FECHA ACTUALIZACION");
 DEPLOY_TH("ACCIONES");
+DEPLOY_TH("asignado");
 
 const TICKETS_TABLE_TBODY = document.createElement("tbody");
 TICKETS_TABLE_TBODY.id = "TICKETS_TABLE_TBODY";
@@ -111,6 +112,7 @@ async function cargarTickets() {
               </div>
             </div>
           </td>
+          <td>${ticket.nombre_agente ? ticket.nombre_agente : "Sin asignar"}</td>
         `;
 
       // Lógica para mostrar/ocultar el menú
@@ -128,51 +130,34 @@ async function cargarTickets() {
       });
 
       // Eventos para los botones del menú
-      tr.querySelector(".asignar-btn").addEventListener("click", () => {
-        alert(`Ticket #${ticket.id_ticket} asignado a ti.`);
+      tr.querySelector(".asignar-btn").addEventListener("click", async () => {
         accionesMenu.style.display = "none";
-        // Aquí puedes agregar la lógica para asignar el ticket
-        // Función que maneja la asignación del ticket
-        async function asignarTicket() {
-          // 1. Obtener el JWT del sessionStorage
-          const token = sessionStorage.getItem("jwt"); // Asegúrate que la clave sea correcta
-          if (!token) {
-            alert("No hay token de autenticación. Por favor, inicia sesión.");
-            return;
-          }
-          try {
-            // 2. Enviar petición POST al webhook
-            const res = await fetch(
-              "http://localhost:5678/webhook/asignar/ticket",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ token }),
-              }
-            );
-            // 3. Manejar respuesta
-            if (res.ok) {
-              alert("¡Ticket asignado correctamente!");
-              // Puedes actualizar la UI aquí, por ejemplo:
-              cargarTickets()
-              // location.reload();  // si quieres recargar
-              // o actualizar un elemento del DOM
-            } else {
-              alert("Error al asignar el ticket. Intenta nuevamente.");
+        // logica para asignarse el ticket
+        try {
+          // 2. Enviar petición POST al webhook
+          const res = await fetch(
+            "http://localhost:5678/webhook/asignar/ticket",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ token, id_ticket: ticket.id_ticket  }),
             }
-          } catch (error) {
-            console.error("Error en la petición:", error);
-            alert("Hubo un problema de conexión.");
-          }
-        }
-        // Asignar evento al botón
-        document
-          .querySelector(".asignar-btn")
-          .addEventListener("click", asignarTicket);
-      });
+          );
 
+          // 3. Manejar respuesta
+          if (res.ok) {
+            alert("¡Ticket asignado correctamente!");
+            cargarTickets(); // Actualiza la lista de tickets
+          } else {
+            alert("Error al asignar el ticket. Intenta nuevamente.");
+          }
+        } catch (error) {
+          console.error("Error en la petición:", error);
+          alert("Hubo un problema de conexión.");
+        }
+      });
 
       tr.querySelector(".enviar-btn").addEventListener("click", () => {
         alert(`Enviar ticket #${ticket.id_ticket} a otro equipo.`);
