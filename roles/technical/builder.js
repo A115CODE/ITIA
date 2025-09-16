@@ -15,4 +15,4 @@ DEPLOY_SCRIPT('./components/navbar/navbar.js');
 DEPLOY_CSS('./components/navbar/navbar.css');
 
 DEPLOY_SCRIPT('./modules/tickets/tickets.js');
-DEPLOY_CSS('./modules/tickets/tickests.css');
+DEPLOY_CSS('./modules/tickets/tickets.css');
