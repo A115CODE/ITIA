@@ -92,6 +92,9 @@ h5{
   padding: 0 20px;
   position: relative;
 }
+#CONVERSATION {
+  overflow: scroll;
+}
 #OUTPUTS {
   position: absolute;
   bottom: 2%;       
